@@ -1,0 +1,18 @@
+service: hello-service
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: ap-northeast-2
+  profile: shared-account
+
+functions:
+  helloUsers:
+    handler: users/get_user.handler
+    events:
+      - httpApi:
+          path: /users/{user_id}
+          method: get
